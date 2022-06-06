@@ -14,6 +14,7 @@ const { parser } = require('@luckbox/token-data-middleware');
  * @param {String[]} rooms
  * @param {Object} user
  * @param {String} handle
+ * @param {String} [token]
  */
 
  /**
@@ -125,7 +126,7 @@ class NotificationClientBackend {
 
     if (event === 'subscribe' || event === 'unsubscribe') {
       const rooms = Array.isArray(message) ? message : [message];
-      if (this.handlers[event](rooms, user, handle)) {
+      if (this.handlers[event](rooms, user, handle, token)) {
         this.send(event, '', rooms, handle);
       }
       return;
